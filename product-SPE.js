@@ -1,0 +1,28 @@
+const SPECIALTY = [
+  { srNo: '1', name: 'TRIIODOBENZOIC ACID', casNo: '88-82-4' },
+  { srNo: '2', name: 'ANTHRONE', casNo: '90-44-8' },
+  { srNo: '3', name: '2 BROMOETHYLAMINE HYDROBROMIDE', casNo: '2576-47-8' },
+  { srNo: '4', name: 'FLUROSCINE DIACETATE', casNo: '596-09-8' },
+  { srNo: '5', name: 'BROMOFORM', casNo: '75-25-2' },
+  { srNo: '6', name: '4-CHLORORESORCINOL', casNo: '95-88-5' },
+  { srNo: '7', name: 'N-1-NAPHTHYL ETHYLENE DIAMINE DIHYDROCHLORIDE', casNo: '1465-25-4' },
+  { srNo: '8', name: 'THIOMALIC ACID', casNo: '70-49-5' },
+  { srNo: '9', name: 'MUCOBROMIC ACID', casNo: '488-11-9' },
+  { srNo: '10', name: '2,4,DINITRO PHENYLHYDRAZINE', casNo: '119-26-6' },
+  { srNo: '11', name: 'PROPARGYL TOSYLATE', casNo: '6165-76-0' },
+  { srNo: '12', name: 'DITHIZONE', casNo: '60-10-6' },
+  { srNo: '13', name: 'ETHIDIUM BROMIDE', casNo: '1239-45-8' },
+  { srNo: '14', name: 'METACHLOROPHENYL PIPRAZINE', casNo: '6640-24-0' },
+  { srNo: '15', name: '4,BENZYLOXY,2-BROMOPROPIOPHENONE', casNo: '35081-45-9' },
+  { srNo: '16', name: '2,4, THIAZOLIDINEDIONE', casNo: '2295-31-0' },
+  { srNo: '17', name: 'PARACHLOROACETANILIDE', casNo: '539-03-7' },
+  { srNo: '18', name: 'PARABROMOACETANILIDE', casNo: '103-88-8' },
+  { srNo: '19', name: 'BARBUTIRIC ACID', casNo: '67-52-7' },
+  { srNo: '20', name: 'THIOBARBUTRIC ACID', casNo: '504-17-6' },
+  { srNo: '21', name: '3,NITROBENZONITRILE', casNo: '619-24-9' },
+  { srNo: '22', name: 'DIMIDIUM BROMIDE', casNo: '20190-03-8' },
+  { srNo: '23', name: '2,AMINOBIPHENYL', casNo: '90-41-5' },
+  { srNo: '24', name: '3,5, DICHLORO ACETANILIDE', casNo: '' },
+];
+
+  export default SPECIALTY;

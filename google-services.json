@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "104057562025",
+    "firebase_url": "https://sujalam-chemicals-default-rtdb.firebaseio.com",
+    "project_id": "sujalam-chemicals",
+    "storage_bucket": "sujalam-chemicals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104057562025:android:65b797cdb03596dedd1ab8",
+        "android_client_info": {
+          "package_name": "app.js"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104057562025-nle0tjdaat0iiptmgg5jr9i7bb6fsagv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHUO1X2qiqP9j_JyY02lObmaiB7m1RnbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104057562025-nle0tjdaat0iiptmgg5jr9i7bb6fsagv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
