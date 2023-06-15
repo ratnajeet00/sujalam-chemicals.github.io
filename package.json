@@ -24,7 +24,8 @@
     "react-native-table-component": "*",
     "react-native-safe-area-context": "4.4.1",
     "@react-native-community/masked-view": "^0.1.0",
-    "express": "*"
+    "@react-native-community/async-storage": "*",
+    "react-native-fs": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
