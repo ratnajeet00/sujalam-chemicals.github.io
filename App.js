@@ -7,6 +7,7 @@ import AddUserPage from "./AddUserPage";
 import Manage from "./manage";
 import LoginPage from "./login";
 
+
 const AppNavigator = createStackNavigator(
   {
     Login: { screen: LoginPage },

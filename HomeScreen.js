@@ -22,8 +22,12 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button title="Manage Product" onPress={handleManageProduct} />
-      <Button title="Add User" onPress={handleAddUser} />
+      <View style={{ marginBottom: 10 }}>
+        <Button title="Manage Product" onPress={handleManageProduct} />
+      </View>
+      <View style={{ marginBottom: 10 }}>
+        <Button title="Add User" onPress={handleAddUser} />
+      </View>
       <Button title="Logout" onPress={handleLogout} />
     </View>
   );
