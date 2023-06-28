@@ -2,7 +2,7 @@
   "expo": {
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover"
+      "resizeMode": "contain"
     },
     "icon": "./assets/icon.png",
     "scheme": "acme",
