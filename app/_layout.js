@@ -5,10 +5,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 const username = "Gamethinks";
 const name = "Arya";
 
-export default function AppLayout() {
+export default () => {
   return (
     <Tabs
-      initialRouteName="home"
+      initialRouteName="index"
       screenOptions={{
         headerStyle: {
           backgroundColor: "#8d8957",
@@ -25,7 +25,10 @@ export default function AppLayout() {
           },
         }}
       />
-      <Tabs.Screen name="(auth)/login" options={{ href: null, headerTitle: "Login" }} />
+      <Tabs.Screen
+        name="(auth)/login"
+        options={{ href: null, headerTitle: "Login" }}
+      />
       <Tabs.Screen
         name="[username]"
         options={{
@@ -43,4 +46,4 @@ export default function AppLayout() {
       />
     </Tabs>
   );
-}
+};
