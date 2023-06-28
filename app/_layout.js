@@ -2,8 +2,12 @@ import { Tabs } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const username = "Gamethinks";
-const name = "Arya";
+const user = {
+  username: "Gamethinks",
+  name: "Arya",
+  lastName: "Stark",
+  email: "gamerthinks@gmail.com",
+};
 
 export default () => {
   return (
@@ -34,9 +38,11 @@ export default () => {
         options={{
           title: "Profile",
           href: {
-            pathname: `/${username}`,
+            pathname: `/${user.username}`,
             params: {
-              name: name,
+              name: user.name,
+              lastName: user.lastName,
+              email: user.email,
             },
           },
           tabBarIcon: ({ color, size }) => {
