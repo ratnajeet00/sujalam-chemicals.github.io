@@ -1,18 +1,17 @@
 import { Tabs } from "expo-router";
-import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const user = {
-  username: "Gamethinks",
+  username: "Gamerthinks",
   name: "Arya",
   lastName: "Stark",
   email: "gamerthinks@gmail.com",
 };
 
-export default () => {
+export default function AppLayout() {
   return (
     <Tabs
-      initialRouteName="index"
       screenOptions={{
         headerStyle: {
           backgroundColor: "#8d8957",
@@ -21,22 +20,18 @@ export default () => {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: "Dashboard",
+          headerTitle: "Dashboard",
+          tabBarLabel: "Dashboard",
           tabBarIcon: ({ color, size }) => {
             return <MaterialIcons name="dashboard" size={size} color={color} />;
           },
         }}
       />
       <Tabs.Screen
-        name="(auth)/login"
-        options={{ href: null, headerTitle: "Login" }}
-      />
-      <Tabs.Screen
-        name="[username]"
+        name="[user]"
         options={{
-          title: "Profile",
           href: {
             pathname: `/${user.username}`,
             params: {
@@ -45,6 +40,7 @@ export default () => {
               email: user.email,
             },
           },
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => {
             return <AntDesign name="user" size={size} color={color} />;
           },
@@ -52,4 +48,4 @@ export default () => {
       />
     </Tabs>
   );
-};
+}
