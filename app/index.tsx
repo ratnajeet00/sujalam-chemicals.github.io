@@ -25,6 +25,11 @@ const Index = () => {
     }
   }, [isLoggedIn, segments, navigationState?.key]);
 
-  return <View>{!navigationState?.key ? <Text>LOADING...</Text> : <></>}</View>;
+  if (!navigationState?.key)
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
 };
 export default Index;
