@@ -5,7 +5,6 @@ export default function home() {
   return (
     <View>
       <Text>Home</Text>
-      <Link href="/login">Login</Link>
     </View>
   );
 }

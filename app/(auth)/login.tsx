@@ -1,9 +1,22 @@
+import { Stack, useRouter } from "expo-router";
 import { Text, View } from "react-native";
+import { AuthStore } from "../../store.js";
 
-export default function login() {
+export default function LogIn() {
+  const router = useRouter();
   return (
-    <View>
-      <Text>pls login first</Text>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Stack.Screen options={{ title: "Login" }} />
+      <Text
+        onPress={() => {
+          AuthStore.update((s) => {
+            s.isLoggedIn = true;
+          });
+          router.replace("(pages)/home");
+        }}
+      >
+        Login
+      </Text>
     </View>
   );
 }
