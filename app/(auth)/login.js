@@ -1,6 +1,6 @@
-import { Stack, useRouter } from "expo-router";
 import { Text, View } from "react-native";
 import { AuthStore } from "../../store.js";
+import { Stack, useRouter } from "expo-router";
 
 export default function LogIn() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function LogIn() {
           AuthStore.update((s) => {
             s.isLoggedIn = true;
           });
-          router.replace("(pages)/home");
+          router.replace("/(pages)/home");
         }}
       >
         Login

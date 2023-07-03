@@ -3,7 +3,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { AuthStore } from "../store";
 
-const Index = () => {
+export default function Index() {
   const segments = useSegments();
   const router = useRouter();
   const { isLoggedIn } = AuthStore.useState((s) => s);
@@ -11,6 +11,7 @@ const Index = () => {
 
   React.useEffect(() => {
     if (!navigationState?.key) return;
+    console.log(navigationState.key);
 
     const inAuthGroup = segments[0] === "(auth)";
 
@@ -19,7 +20,7 @@ const Index = () => {
       !isLoggedIn &&
       !inAuthGroup
     ) {
-      router.replace("(auth)/login");
+      router.replace("/login");
     } else if (isLoggedIn) {
       router.replace("(pages)/home");
     }
@@ -31,5 +32,4 @@ const Index = () => {
         <Text>Loading...</Text>
       </View>
     );
-};
-export default Index;
+}
