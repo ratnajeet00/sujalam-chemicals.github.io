@@ -6,6 +6,7 @@
     },
     "icon": "./assets/icon.png",
     "scheme": "acme",
+    "userInterfaceStyle": "automatic",
     "web": {
       "bundler": "metro"
     },
