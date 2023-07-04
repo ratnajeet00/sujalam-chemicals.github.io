@@ -1,4 +1,8 @@
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import COLORS from "../../constants/colors";
 
@@ -10,6 +14,10 @@ const TabsLayout = () => {
           backgroundColor: COLORS.primary,
         },
         headerTintColor: "white",
+        tabBarStyle: {
+          backgroundColor: COLORS.primary,
+        },
+        tabBarActiveTintColor: COLORS.accent,
       }}
     >
       <Tabs.Screen
@@ -18,6 +26,28 @@ const TabsLayout = () => {
           title: "Dashboard",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="dashboard" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="inventory"
+        options={{
+          title: "Inventory",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="inventory" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="orders"
+        options={{
+          title: "Orders",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="truck-delivery"
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
