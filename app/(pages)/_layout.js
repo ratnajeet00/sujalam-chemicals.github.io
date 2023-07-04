@@ -1,9 +1,17 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import COLORS from "../../constants/colors";
 
 const TabsLayout = () => {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: COLORS.primary,
+        },
+        headerTintColor: "white",
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
