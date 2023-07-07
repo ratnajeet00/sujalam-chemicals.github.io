@@ -1,79 +1,69 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { Stack, useRouter } from "expo-router";
-import React from "react";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import {
+  Button,
+  Image,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
   View,
+  useWindowDimensions,
 } from "react-native";
-import COLORS from "../../constants/colors.js";
+import LOGO from "../../assets/LOGO.png";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import CustomInput from "../../components/CustomInput/CustomInput";
+import COLORS from "../../constants/colors";
 import { AuthStore } from "../../store.js";
 
 export default function LogIn() {
   const router = useRouter();
+  const { height } = useWindowDimensions();
+
+  const [employeeId, setEmployeeId] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.container}>
-      <Stack.Screen options={{ title: "Login" }} />
-      <Text style={styles.title}>Sujalam Chemicals</Text>
-      <MaterialIcons name="login" size={90} color="white" style={styles.icon} />
-      <TextInput
-        style={styles.input}
-        placeholder="Employee ID"
-        placeholderTextColor="#ffffff"
+    <View style={styles.root}>
+      <StatusBar style="light" />
+      <Image
+        source={LOGO}
+        resizeMode="contain"
+        style={[styles.logo, { height: height * 0.3 }]}
       />
-      <TextInput
-        style={styles.input}
+      <CustomInput
+        placeholder="Employee ID"
+        value={employeeId}
+        setValue={setEmployeeId}
+      />
+      <CustomInput
         placeholder="Password"
-        placeholderTextColor="#ffffff"
+        value={password}
+        setValue={setPassword}
         secureTextEntry={true}
       />
-      <TouchableOpacity
+      <CustomButton />
+      <Button
+        title="Log In"
         onPress={() => {
           AuthStore.update((s) => {
             s.isLoggedIn = true;
           });
           router.replace("/(pages)/home");
         }}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.primary,
+    padding: 20,
+    paddingTop: 50,
   },
-  title: {
-    color: "#ffffff",
-    fontSize: 30,
-    marginBottom: 50,
-  },
-  icon: {
-    marginBottom: 75,
-  },
-  input: {
-    height: 40,
-    width: "80%",
-    borderColor: "#ffffff",
-    borderWidth: 1,
-    color: "#ffffff",
-    paddingHorizontal: 10,
-    marginVertical: 10,
-  },
-  button: {
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginVertical: 10,
+  logo: {
+    width: "70%",
+    maxWidth: 300,
   },
 });
