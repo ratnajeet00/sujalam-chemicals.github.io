@@ -20,11 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   container_PRIMARY: { backgroundColor: COLORS.primary },
-
-  container_TERITARY: {},
-
   text_PRIMARY: { fontWeight: "bold", color: "white" },
-
   text_TERITARY: { color: "gray" },
 });
 

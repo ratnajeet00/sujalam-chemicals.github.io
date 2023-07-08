@@ -11,7 +11,6 @@ import { AuthStore } from "../../store.js";
 export default function LogIn() {
   const router = useRouter();
   const { height } = useWindowDimensions();
-
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
 
