@@ -1,12 +1,7 @@
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  View,
-  useWindowDimensions
-} from "react-native";
+import { Image, StyleSheet, View, useWindowDimensions } from "react-native";
 import LOGO from "../../assets/LOGO.png";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
