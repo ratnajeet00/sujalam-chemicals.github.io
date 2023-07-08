@@ -48,7 +48,7 @@ export default function LogIn() {
       <CustomButton
         onPress={onForgotPasswordPressed}
         text="Forgot password?"
-        type="TERITARY"
+        type="TERTIARY"
       />
     </View>
   );

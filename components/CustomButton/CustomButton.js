@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   container_PRIMARY: { backgroundColor: COLORS.primary },
   text_PRIMARY: { fontWeight: "bold", color: "white" },
-  text_TERITARY: { color: "gray" },
+  text_TERTIARY: { color: "gray" },
 });
 
 export default CustomButton;
