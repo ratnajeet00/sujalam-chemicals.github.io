@@ -11,11 +11,11 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.bg,
         },
         headerTintColor: "white",
         tabBarStyle: {
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.bg,
         },
         tabBarActiveTintColor: COLORS.accent,
       }}
