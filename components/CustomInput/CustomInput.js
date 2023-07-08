@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import COLORS from "../../constants/colors";
 
-const CustomInput = ({ value, setValue, placeholder, secureTextEntry }) => (
+const CustomInput = ({ value, setValue, placeholder, secureTextEntry=false }) => (
   <View style={styles.container}>
     <TextInput
       value={value}

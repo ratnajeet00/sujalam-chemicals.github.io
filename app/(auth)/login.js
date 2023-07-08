@@ -22,7 +22,7 @@ export default function LogIn() {
   };
 
   const onForgotPasswordPressed = () => {
-    console.warn("Forgot Password Pressed");
+    router.push("/forgotPassword");
   };
 
   return (
