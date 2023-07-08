@@ -2,11 +2,10 @@ import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
-  Button,
   Image,
   StyleSheet,
   View,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
 import LOGO from "../../assets/LOGO.png";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -20,6 +19,17 @@ export default function LogIn() {
 
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
+
+  const onSignInPressed = () => {
+    AuthStore.update((s) => {
+      s.isLoggedIn = true;
+    });
+    router.replace("/(pages)/home");
+  };
+
+  const onForgotPasswordPressed = () => {
+    console.warn("Forgot Password Pressed");
+  };
 
   return (
     <View style={styles.root}>
@@ -40,15 +50,11 @@ export default function LogIn() {
         setValue={setPassword}
         secureTextEntry={true}
       />
-      <CustomButton />
-      <Button
-        title="Log In"
-        onPress={() => {
-          AuthStore.update((s) => {
-            s.isLoggedIn = true;
-          });
-          router.replace("/(pages)/home");
-        }}
+      <CustomButton onPress={onSignInPressed} text="Sign In" type="PRIMARY" />
+      <CustomButton
+        onPress={onForgotPasswordPressed}
+        text="Forgot password?"
+        type="TERITARY"
       />
     </View>
   );
@@ -58,9 +64,9 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.bg,
     padding: 20,
-    paddingTop: 50,
+    paddingTop: 100,
   },
   logo: {
     width: "70%",
