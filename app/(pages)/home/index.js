@@ -12,7 +12,7 @@ export default function home() {
     console.info("Scanned QR");
   };
   return (
-    <View style={{ margin: 10 }}>
+    <View style={{ margin: 15 }}>
       <QuickViewPanel header="Inventory" />
       <QuickViewPanel header="Orders" />
       <View style={styles.qr}>
