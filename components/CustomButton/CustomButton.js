@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   container_PRIMARY: { backgroundColor: COLORS.primary },
+  container_MEDIUM: {
+    backgroundColor: COLORS.primary,
+    width: "48%",
+    borderColor: COLORS.accent,
+    borderWidth: 1,
+  },
   text_PRIMARY: { fontWeight: "bold", color: "white" },
   text_TERTIARY: { color: "gray" },
 });

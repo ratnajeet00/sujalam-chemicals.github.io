@@ -1,24 +1,28 @@
 import { useRouter } from "expo-router";
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, StyleSheet, FlatList } from "react-native";
+import QuickViewPanel from "../../../components/Dashboard/QuickViewPanel";
+import CustomButton from "../../../components/CustomButton/CustomButton";
 
 export default function home() {
   const router = useRouter;
+  const onGenerateQR = () => {
+    console.info("Generated QR");
+  };
+  const onScanQR = () => {
+    console.info("Scanned QR");
+  };
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Inventory quick View</Text>
-      <Text>Orders quick View</Text>
-      <Button
-        title="Scan QR"
-        onPress={() => {
-          // 
-        }}
-      />
-      <Button
-        title="Generate QR"
-        onPress={() => {
-          // 
-        }}
-      />
+    <View style={{ margin: 10 }}>
+      <QuickViewPanel header="Inventory" />
+      <QuickViewPanel header="Orders" />
+      <View style={styles.qr}>
+        <CustomButton onPress={onGenerateQR} text="Generate QR" type="MEDIUM" />
+        <CustomButton onPress={onScanQR} text="Scan QR" type="MEDIUM" />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  qr: { flexDirection: "row", justifyContent: "space-between" },
+});
