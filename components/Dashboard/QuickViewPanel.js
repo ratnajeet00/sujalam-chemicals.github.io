@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import COLORS from "../../constants/colors";
 
 const chemicals = [
@@ -10,19 +10,15 @@ const chemicals = [
   { id: "5", name: "Chemical C", expiryDate: "2023-07-12", quantity: 45 },
   { id: "6", name: "Chemical C", expiryDate: "2023-07-12", quantity: 60 },
   { id: "7", name: "Chemical C", expiryDate: "2023-07-12", quantity: 34 },
-];
+]; // Dummy data
+
+const { height, width } = Dimensions.get("window");
 
 const QuickViewPanel = ({ header }) => {
   const renderChemical = ({ item }) => (
     <View style={styles.item}>
-      <View>
-        <Text style={styles.item_detail}>{item.name}</Text>
-        <Text style={styles.item_detail}>Exp Date: {item.expiryDate}</Text>
-      </View>
-      <View>
-        <Text style={styles.item_detail}>Qty: {item.quantity}</Text>
-        <Text style={styles.item_detail}>Status: {item.quantity}</Text> 
-      </View>
+      <Text style={styles.itemDetail}>{item.name}</Text>
+      <Text style={styles.itemDetail}>Status: {item.quantity}</Text>
     </View>
   );
 
@@ -58,15 +54,14 @@ const styles = StyleSheet.create({
   },
   item: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 5,
+    columnGap: 70,
     borderBottomColor: COLORS.accent,
     borderBottomWidth: 1,
-    marginTop: 10,
+    paddingVertical: 15,
   },
-  item_detail: { fontSize: 16 },
+  itemDetail: { fontSize: 16 },
   flatList: {
-    height: 200,
+    height: height * 0.27,
   },
 });
 
