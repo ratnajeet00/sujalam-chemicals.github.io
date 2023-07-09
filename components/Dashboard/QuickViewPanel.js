@@ -3,20 +3,26 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import COLORS from "../../constants/colors";
 
 const chemicals = [
-  { id: "1", name: "Chemical A", expiryDate: "2023-07-10" },
-  { id: "2", name: "Chemical B", expiryDate: "2023-07-11" },
-  { id: "3", name: "Chemical C", expiryDate: "2023-07-12" },
-  { id: "4", name: "Chemical C", expiryDate: "2023-07-12" },
-  { id: "5", name: "Chemical C", expiryDate: "2023-07-12" },
-  { id: "6", name: "Chemical C", expiryDate: "2023-07-12" },
-  { id: "7", name: "Chemical C", expiryDate: "2023-07-12" },
+  { id: "1", name: "Chemical A", expiryDate: "2023-07-10", quantity: 45 },
+  { id: "2", name: "Chemical B", expiryDate: "2023-07-11", quantity: 23 },
+  { id: "3", name: "Chemical C", expiryDate: "2023-07-12", quantity: 34 },
+  { id: "4", name: "Chemical C", expiryDate: "2023-07-12", quantity: 40 },
+  { id: "5", name: "Chemical C", expiryDate: "2023-07-12", quantity: 45 },
+  { id: "6", name: "Chemical C", expiryDate: "2023-07-12", quantity: 60 },
+  { id: "7", name: "Chemical C", expiryDate: "2023-07-12", quantity: 34 },
 ];
 
 const QuickViewPanel = ({ header }) => {
-  const renderItem = ({ item }) => (
+  const renderChemical = ({ item }) => (
     <View style={styles.item}>
-      <Text>{item.name}</Text>
-      <Text>Expiry Date: {item.expiryDate}</Text>
+      <View>
+        <Text style={styles.item_detail}>{item.name}</Text>
+        <Text style={styles.item_detail}>Exp Date: {item.expiryDate}</Text>
+      </View>
+      <View>
+        <Text style={styles.item_detail}>Qty: {item.quantity}</Text>
+        <Text style={styles.item_detail}>Status: {item.quantity}</Text> 
+      </View>
     </View>
   );
 
@@ -25,7 +31,7 @@ const QuickViewPanel = ({ header }) => {
       <Text style={styles.title}>{header}</Text>
       <FlatList
         data={chemicals}
-        renderItem={renderItem}
+        renderItem={renderChemical}
         keyExtractor={(item) => item.id}
         style={styles.flatList}
         scrollEnabled={true}
@@ -47,14 +53,20 @@ const styles = StyleSheet.create({
   },
   title: {
     borderBottomColor: COLORS.accent,
-    borderBottomWidth: 1,
+    borderBottomWidth: 5,
     fontSize: 20,
   },
   item: {
-    // your styles here
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 5,
+    borderBottomColor: COLORS.accent,
+    borderBottomWidth: 1,
+    marginTop: 10,
   },
+  item_detail: { fontSize: 16 },
   flatList: {
-    height: 240,
+    height: 200,
   },
 });
 
