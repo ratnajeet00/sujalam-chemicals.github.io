@@ -6,19 +6,40 @@ import LOGO from "../../assets/LOGO.png";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import COLORS from "../../constants/colors";
-import { AuthStore } from "../../store.js";
+import {AuthStore} from "../../store.js"
 
 export default function LogIn() {
   const router = useRouter();
   const { height } = useWindowDimensions();
-  const [employeeId, setEmployeeId] = useState("");
+  const [username, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSignInPressed = () => {
-    AuthStore.update((s) => {
-      s.isLoggedIn = true;
-    });
-    router.replace("/(pages)/home");
+  const onSignInPressed = async () => {
+    try {
+      const body = JSON.stringify({
+        username: username,
+        password: password,
+      });
+
+      const response = await fetch("https://eminent-quickest-menu.glitch.me/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
+   
+      const data = await response.json();
+      if (data.message) {
+        AuthStore.update((s) => {
+          s.isLoggedIn = true;
+        });
+        router.replace("/(pages)/home");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+   
   };
 
   const onForgotPasswordPressed = () => {
@@ -35,7 +56,7 @@ export default function LogIn() {
       />
       <CustomInput
         placeholder="Employee ID"
-        value={employeeId}
+        value={username}
         setValue={setEmployeeId}
       />
       <CustomInput
