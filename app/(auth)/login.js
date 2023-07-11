@@ -6,7 +6,7 @@ import LOGO from "../../assets/LOGO.png";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import COLORS from "../../constants/colors";
-import {AuthStore} from "../../store.js"
+import { AuthStore } from "../../store.js";
 
 export default function LogIn() {
   const router = useRouter();
@@ -21,14 +21,17 @@ export default function LogIn() {
         password: password,
       });
 
-      const response = await fetch("https://eminent-quickest-menu.glitch.me/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: body,
-      });
-   
+      const response = await fetch(
+        "https://eminent-quickest-menu.glitch.me/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: body,
+        }
+      );
+
       const data = await response.json();
       if (data.message) {
         AuthStore.update((s) => {
@@ -39,7 +42,6 @@ export default function LogIn() {
     } catch (error) {
       console.error(error);
     }
-   
   };
 
   const onForgotPasswordPressed = () => {
