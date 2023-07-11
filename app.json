@@ -10,6 +10,14 @@
     "web": {
       "bundler": "metro"
     },
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow $(Sujalam-Chemicals) to access camera."
+        }
+      ]
+    ],
     "name": "Sujalam-Chemicals",
     "slug": "Sujalam-Chemicals"
   }
