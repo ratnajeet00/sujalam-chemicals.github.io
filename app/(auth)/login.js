@@ -1,7 +1,13 @@
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Image, StyleSheet, View, useWindowDimensions } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import LOGO from "../../assets/LOGO.png";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -10,12 +16,15 @@ import { AuthStore } from "../../store.js";
 
 export default function LogIn() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const { height } = useWindowDimensions();
   const [username, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
   const onSignInPressed = async () => {
+    setIsLoading(true);
     if (!username || !password) {
       alert("Please enter both username and password");
+      setIsLoading(false);
       return;
     }
 
@@ -47,6 +56,8 @@ export default function LogIn() {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -74,6 +85,7 @@ export default function LogIn() {
         secureTextEntry={true}
       />
       <CustomButton onPress={onSignInPressed} text="Sign In" type="PRIMARY" />
+      {isLoading && <ActivityIndicator size="large" />}
       <CustomButton
         onPress={onForgotPasswordPressed}
         text="Forgot password?"
