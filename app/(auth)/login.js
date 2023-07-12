@@ -13,37 +13,40 @@ export default function LogIn() {
   const { height } = useWindowDimensions();
   const [username, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
-
   const onSignInPressed = async () => {
+    if (!username || !password) {
+      alert("Please enter both username and password");
+      return;
+    }
+  
     try {
       const body = JSON.stringify({
         username: username,
         password: password,
       });
-
-      const response = await fetch(
-        "https://eminent-quickest-menu.glitch.me/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: body,
-        }
-      );
-
+  
+      const response = await fetch("https://eminent-quickest-menu.glitch.me/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
+  
       const data = await response.json();
-      if (data.message) {
+      if (response.ok && data.message === "success") {
         AuthStore.update((s) => {
           s.isLoggedIn = true;
         });
         router.replace("/(pages)/home");
+      } else {
+        alert("Login failed");
       }
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const onForgotPasswordPressed = () => {
     router.push("/forgotPassword");
   };
