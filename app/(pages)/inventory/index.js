@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { ScrollView, View, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import ChemicalCard from "../../../components/Inventory/ChemicalCard";
 
