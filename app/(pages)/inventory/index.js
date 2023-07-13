@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { ScrollView, View, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import ChemicalCard from "../../../components/Inventory/ChemicalCard";
 
@@ -13,7 +13,7 @@ export default function Inventory() {
     fetchInventoryData();
 
     // Fetch inventory data every 5 seconds
-    const interval = setInterval(fetchInventoryData, 5000);
+    const interval = setInterval(fetchInventoryData, 10000);
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval);

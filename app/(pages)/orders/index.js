@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import OrderCard from "../../../components/Orders/OrdersCard";
@@ -61,10 +61,7 @@ export default function Orders() {
 
   return (
     <View style={{ margin: 15, paddingBottom: 40 }}>
-      <FilteredSearch
-        placeholder="Order"
-        filterOptions={ordersFilterOptions}
-      />
+      <FilteredSearch placeholder="Order" filterOptions={ordersFilterOptions} />
       <ScrollView>
         {sortedData.map((item, index) => (
           <OrderCard key={index} item={item} />
