@@ -1,57 +1,40 @@
-import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { useState, useEffect } from "react";
+import { ScrollView, View, Text } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import ChemicalCard from "../../../components/Inventory/ChemicalCard";
 
-const inventoryData = [
-  {
-    name: "Sodium Chloride",
-    quantity: 100,
-    dateOfManufacture: "2023-01-01",
-    dateOfExpiry: "2025-01-01",
-    type: "Salt",
-  },
-  {
-    name: "Sulfuric Acid",
-    quantity: 50,
-    dateOfManufacture: "2023-02-01",
-    dateOfExpiry: "2024-02-01",
-    type: "Acid",
-  },
-  {
-    name: "Ethanol",
-    quantity: 200,
-    dateOfManufacture: "2023-03-01",
-    dateOfExpiry: "2026-03-01",
-    type: "Alcohol",
-  },
-  {
-    name: "Acetone",
-    quantity: 150,
-    dateOfManufacture: "2023-04-01",
-    dateOfExpiry: "2025-04-01",
-    type: "Ketone",
-  },
-  {
-    name: "Methanol",
-    quantity: 100,
-    dateOfManufacture: "2023-05-01",
-    dateOfExpiry: "2024-05-01",
-    type: "Alcohol",
-  },
-  {
-    name: "Sodium Chloride",
-    quantity: 100,
-    dateOfManufacture: "2023-01-01",
-    dateOfExpiry: "2025-01-01",
-    type: "Salt",
-  },
-];
-
 export default function Inventory() {
-  const [sortedData, setSortedData] = useState(inventoryData);
+  const [inventoryData, setInventoryData] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilter, setSelectedFilter] = useState(null);
+
+  useEffect(() => {
+    fetchInventoryData();
+
+    // Fetch inventory data every 5 seconds
+    const interval = setInterval(fetchInventoryData, 5000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  const fetchInventoryData = () => {
+    try {
+      fetch("https://eminent-quickest-menu.glitch.me/inventoryList")
+        .then((response) => response.json())
+        .then((data) => {
+          setInventoryData(data);
+          setSortedData(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching inventory data:", error);
+        });
+    } catch (error) {
+      console.error("Error fetching inventory data:", error);
+    }
+  };
 
   const sortData = (key) => {
     if (selectedFilter === key) {
@@ -74,9 +57,9 @@ export default function Inventory() {
     { text: "Quantity", onPress: () => sortData("quantity") },
     {
       text: "Date of Manufacture",
-      onPress: () => sortData("dateOfManufacture"),
+      onPress: () => sortData("date_of_manufacture"),
     },
-    { text: "Date of Expiry", onPress: () => sortData("dateOfExpiry") },
+    { text: "Date of Expiry", onPress: () => sortData("date_of_expiry") },
     { text: "Type", onPress: () => sortData("type") },
   ];
 
@@ -87,9 +70,13 @@ export default function Inventory() {
         filterOptions={inventoryFilterOptions}
       />
       <ScrollView>
-        {sortedData.map((item, index) => (
-          <ChemicalCard key={index} item={item} />
-        ))}
+        {sortedData.length === 0 ? (
+          <Text>No inventory data available</Text>
+        ) : (
+          sortedData.map((item, index) => (
+            <ChemicalCard key={index} item={item} />
+          ))
+        )}
       </ScrollView>
     </View>
   );

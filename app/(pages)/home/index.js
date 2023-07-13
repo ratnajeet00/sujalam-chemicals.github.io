@@ -1,28 +1,42 @@
-import { useRouter } from "expo-router";
-import { Button, Text, View, StyleSheet, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import QuickViewPanel from "../../../components/Dashboard/QuickViewPanel";
-import CustomButton from "../../../components/CustomButton/CustomButton";
 
-export default function home() {
-  const router = useRouter;
-  const onGenerateQR = () => {
-    console.info("Generated QR");
+export default function Home() {
+  const [inventoryData, setInventoryData] = useState([]);
+  const [ordersData, setOrdersData] = useState([]);
+
+  useEffect(() => {
+    fetchInventoryData();
+    fetchOrdersData();
+  }, []);
+
+  const fetchInventoryData = () => {
+    fetch("http://localhost:3000/inventoryList") // Update with your server URL
+      .then((response) => response.json())
+      .then((data) => {
+        setInventoryData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching inventory data:", error);
+      });
   };
-  const onScanQR = () => {
-    console.info("Scanned QR");
+
+  const fetchOrdersData = () => {
+    fetch("http://localhost:3000/viewOrders") // Update with your server URL
+      .then((response) => response.json())
+      .then((data) => {
+        setOrdersData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders data:", error);
+      });
   };
+
   return (
     <View style={{ margin: 15 }}>
-      <QuickViewPanel header="Inventory" />
-      <QuickViewPanel header="Orders" />
-      <View style={styles.qr}>
-        <CustomButton onPress={onGenerateQR} text="Generate QR" type="MEDIUM" />
-        <CustomButton onPress={onScanQR} text="Scan QR" type="MEDIUM" />
-      </View>
+      <QuickViewPanel header="Inventory" data={inventoryData} />
+      <QuickViewPanel header="Orders" data={ordersData} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  qr: { flexDirection: "row", justifyContent: "space-between" },
-});

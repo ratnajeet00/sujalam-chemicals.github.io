@@ -2,19 +2,9 @@ import React from "react";
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import COLORS from "../../constants/colors";
 
-const chemicals = [
-  { id: "1", name: "Chemical A", expiryDate: "2023-07-10", quantity: 45 },
-  { id: "2", name: "Chemical B", expiryDate: "2023-07-11", quantity: 23 },
-  { id: "3", name: "Chemical C", expiryDate: "2023-07-12", quantity: 34 },
-  { id: "4", name: "Chemical C", expiryDate: "2023-07-12", quantity: 40 },
-  { id: "5", name: "Chemical C", expiryDate: "2023-07-12", quantity: 45 },
-  { id: "6", name: "Chemical C", expiryDate: "2023-07-12", quantity: 60 },
-  { id: "7", name: "Chemical C", expiryDate: "2023-07-12", quantity: 34 },
-]; // Dummy data
-
 const { height, width } = Dimensions.get("window");
 
-const QuickViewPanel = ({ header }) => {
+const QuickViewPanel = ({ header, data }) => {
   const renderChemical = ({ item }) => (
     <View style={styles.item}>
       <Text style={styles.itemDetail}>{item.name}</Text>
@@ -25,13 +15,17 @@ const QuickViewPanel = ({ header }) => {
   return (
     <View style={styles.root}>
       <Text style={styles.title}>{header}</Text>
-      <FlatList
-        data={chemicals}
-        renderItem={renderChemical}
-        keyExtractor={(item) => item.id}
-        style={styles.flatList}
-        scrollEnabled={true}
-      />
+      {data.length > 0 ? (
+        <FlatList
+          data={data}
+          renderItem={renderChemical}
+          keyExtractor={(item) => item.id}
+          style={styles.flatList}
+          scrollEnabled={true}
+        />
+      ) : (
+        <Text>No data available</Text>
+      )}
     </View>
   );
 };

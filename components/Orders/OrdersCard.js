@@ -4,14 +4,14 @@ import { StyleSheet, Text, View } from "react-native";
 const OrderCard = ({ item }) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>{item.chemicalName}</Text>
-      <Text>Qty: {item.qty}</Text>
-      <Text>Date of Ordering: {item.dateOfOrdering}</Text>
+      <Text style={styles.name}>{item.chemical_name}</Text>
+      <Text>Qty: {item.quantity}</Text>
+      <Text>Date of Ordering: {item.date_of_order}</Text>
       <Text>
         Date of Delivery:{" "}
-        {item.dateOfDelivery ? item.dateOfDelivery : "Not Delivered"}
+        {item.dateOfDelivery ? item.date_of_delivery : "Not Delivered"}
       </Text>
-      <Text>Client Name: {item.clientName}</Text>
+      <Text>Client Name: {item.customer_name}</Text>
     </View>
   );
 };

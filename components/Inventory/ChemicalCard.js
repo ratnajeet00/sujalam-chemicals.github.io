@@ -4,10 +4,10 @@ import { StyleSheet, Text, View } from "react-native";
 const ChemicalCard = ({ item }) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.name}>{item.item_name}</Text>
       <Text>Quantity: {item.quantity}</Text>
-      <Text>Date of Manufacture: {item.dateOfManufacture}</Text>
-      <Text>Date of Expiry: {item.dateOfExpiry}</Text>
+      <Text>Date of Manufacture: {item.date_of_manufacture}</Text>
+      <Text>Date of Expiry: {item.date_of_expiry}</Text>
       <Text>Type: {item.type}</Text>
     </View>
   );

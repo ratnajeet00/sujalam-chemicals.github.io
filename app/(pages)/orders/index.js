@@ -1,57 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import OrderCard from "../../../components/Orders/OrdersCard";
 
-const ordersData = [
-  {
-    chemicalName: "Sodium Chloride",
-    qty: 100,
-    dateOfOrdering: "2023-01-01",
-    dateOfDelivery: null,
-    clientName: "Client A",
-  },
-  {
-    chemicalName: "Sulfuric Acid",
-    qty: 50,
-    dateOfOrdering: "2023-02-01",
-    dateOfDelivery: null,
-    clientName: "Client B",
-  },
-  {
-    chemicalName: "Ethanol",
-    qty: 200,
-    dateOfOrdering: "2023-03-01",
-    dateOfDelivery: null,
-    clientName: "Client C",
-  },
-  {
-    chemicalName: "Acetone",
-    qty: 150,
-    dateOfOrdering: "2023-04-01",
-    dateOfDelivery: null,
-    clientName: "Client D",
-  },
-  {
-    chemicalName: "Methanol",
-    qty: 100,
-    dateOfOrdering: "2023-05-01",
-    dateOfDelivery: null,
-    clientName: "Client E",
-  },
-  {
-    chemicalName: "Sodium Chloride",
-    qty: 100,
-    dateOfOrdering: "2023-01-01",
-    dateOfDelivery: null,
-    clientName: "Client A",
-  },
-];
-
 export default function Orders() {
-  const [sortedData, setSortedData] = useState(ordersData);
+  const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilter, setSelectedFilter] = useState(null);
+
+  useEffect(() => {
+    fetchOrdersData();
+
+    // Fetch orders data every 5 seconds
+    const interval = setInterval(fetchOrdersData, 5000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  const fetchOrdersData = () => {
+    try {
+      fetch("https://eminent-quickest-menu.glitch.me/viewOrders")
+        .then((response) => response.json())
+        .then((data) => {
+          setSortedData(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching orders data:", error);
+        });
+    } catch (error) {
+      console.error("Error fetching orders data:", error);
+    }
+  };
 
   const sortData = (key) => {
     if (selectedFilter === key) {
@@ -80,7 +61,10 @@ export default function Orders() {
 
   return (
     <View style={{ margin: 15, paddingBottom: 40 }}>
-      <FilteredSearch placeholder="Order" filterOptions={ordersFilterOptions} />
+      <FilteredSearch
+        placeholder="Order"
+        filterOptions={ordersFilterOptions}
+      />
       <ScrollView>
         {sortedData.map((item, index) => (
           <OrderCard key={index} item={item} />
