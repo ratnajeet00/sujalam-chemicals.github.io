@@ -13,7 +13,7 @@ export default function Inventory() {
     fetchInventoryData();
 
     // Fetch inventory data every 5 seconds
-    const interval = setInterval(fetchInventoryData, 5000);
+    const interval = setInterval(fetchInventoryData, 10000);
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval);
