@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import QuickViewPanel from "../../../components/Dashboard/QuickViewPanel";
 
+
 export default function Home() {
   const [inventoryData, setInventoryData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
@@ -23,7 +24,7 @@ export default function Home() {
   };
 
   const fetchOrdersData = () => {
-    fetch("https://eminent-quickest-menu.glitch.me//orderList") // Update with your server URL
+    fetch("https://eminent-quickest-menu.glitch.me/orderList") // Update with your server URL
       .then((response) => response.json())
       .then((data) => {
         setOrdersData(data);
