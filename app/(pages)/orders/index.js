@@ -10,11 +10,7 @@ export default function Orders() {
 
   useEffect(() => {
     fetchOrdersData();
-
-    // Fetch orders data every 5 seconds
-    const interval = setInterval(fetchOrdersData, 5000);
-
-    // Cleanup the interval on component unmount
+    const interval = setInterval(fetchOrdersData, 10000);
     return () => clearInterval(interval);
   }, []);
 
