@@ -20,7 +20,7 @@ export default function Orders() {
 
   const fetchOrdersData = () => {
     try {
-      fetch("https://eminent-quickest-menu.glitch.me/viewOrders")
+      fetch("https://eminent-quickest-menu.glitch.me/orderList")
         .then((response) => response.json())
         .then((data) => {
           setSortedData(data);

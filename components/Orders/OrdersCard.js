@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 const OrderCard = ({ item }) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>{item.chemical_name}</Text>
+      <Text style={styles.name}>{item.item_name}</Text>
       <Text>Qty: {item.quantity}</Text>
       <Text>Date of Ordering: {item.date_of_order}</Text>
       <Text>

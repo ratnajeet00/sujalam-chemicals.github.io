@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
 
   const fetchInventoryData = () => {
-    fetch("http://localhost:3000/inventoryList") // Update with your server URL
+    fetch("https://eminent-quickest-menu.glitch.me/itemList") // Update with your server URL
       .then((response) => response.json())
       .then((data) => {
         setInventoryData(data);
@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   const fetchOrdersData = () => {
-    fetch("http://localhost:3000/viewOrders") // Update with your server URL
+    fetch("https://eminent-quickest-menu.glitch.me//orderList") // Update with your server URL
       .then((response) => response.json())
       .then((data) => {
         setOrdersData(data);

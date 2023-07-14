@@ -7,7 +7,7 @@ const { height, width } = Dimensions.get("window");
 const QuickViewPanel = ({ header, data }) => {
   const renderChemical = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.itemDetail}>{item.name}</Text>
+      <Text style={styles.itemDetail}>{item.item_name}</Text>
       <Text style={styles.itemDetail}>Status: {item.quantity}</Text>
     </View>
   );

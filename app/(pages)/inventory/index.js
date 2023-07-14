@@ -21,7 +21,7 @@ export default function Inventory() {
 
   const fetchInventoryData = () => {
     try {
-      fetch("https://eminent-quickest-menu.glitch.me/inventoryList")
+      fetch("https://eminent-quickest-menu.glitch.me/itemList")
         .then((response) => response.json())
         .then((data) => {
           setInventoryData(data);
