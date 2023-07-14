@@ -7,8 +7,12 @@ const { height, width } = Dimensions.get("window");
 const QuickViewPanel = ({ header, data }) => {
   const renderChemical = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.itemDetail}>{item.item_name}</Text>
-      <Text style={styles.itemDetail}>Status: {item.quantity}</Text>
+      <View style={styles.itemName}>
+        <Text style={styles.itemText}>{item.item_name}</Text>
+      </View>
+      <View>
+        <Text>QTY: {item.quantity}</Text>
+      </View>
     </View>
   );
 
@@ -53,7 +57,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 15,
   },
-  itemDetail: { fontSize: 16 },
+  itemName: { minWidth: width * 0.4, maxWidth: width * 0.4 },
+  itemText: { fontSize: 15 },
   flatList: {
     height: height * 0.27,
   },

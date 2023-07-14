@@ -12,10 +12,8 @@ export default function Inventory() {
   useEffect(() => {
     fetchInventoryData();
 
-    // Fetch inventory data every 5 seconds
     const interval = setInterval(fetchInventoryData, 10000);
 
-    // Cleanup the interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -55,11 +53,6 @@ export default function Inventory() {
 
   const inventoryFilterOptions = [
     { text: "Quantity", onPress: () => sortData("quantity") },
-    {
-      text: "Date of Manufacture",
-      onPress: () => sortData("date_of_manufacture"),
-    },
-    { text: "Date of Expiry", onPress: () => sortData("date_of_expiry") },
     { text: "Type", onPress: () => sortData("type") },
   ];
 
