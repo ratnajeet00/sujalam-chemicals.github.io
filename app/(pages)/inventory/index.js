@@ -64,7 +64,17 @@ export default function Inventory() {
       />
       <ScrollView>
         {sortedData.length === 0 ? (
-          <Text>No inventory data available</Text>
+          <Text
+            style={{
+              textAlign: "center",
+              marginTop: 20,
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "#999",
+            }}
+          >
+            No inventory data available
+          </Text>
         ) : (
           sortedData.map((item, index) => (
             <ChemicalCard key={index} item={item} />
