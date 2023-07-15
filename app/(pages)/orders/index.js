@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
-import OrderCard from "../../../components/Orders/OrdersCard";
 import AddOrder from "../../../components/Orders/AddOrder";
+import OrderCard from "../../../components/Orders/OrdersCard";
 
 export default function Orders() {
+  const [activeCard, setActiveCard] = useState(null);
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -73,7 +74,14 @@ export default function Orders() {
             No inventory data available
           </Text>
         ) : (
-          sortedData.map((item, index) => <OrderCard key={index} item={item} />)
+          sortedData.map((item, index) => (
+            <OrderCard
+              key={index}
+              item={item}
+              showButtons={activeCard === item.id}
+              setShowButtons={setActiveCard}
+            />
+          ))
         )}
       </ScrollView>
     </View>
