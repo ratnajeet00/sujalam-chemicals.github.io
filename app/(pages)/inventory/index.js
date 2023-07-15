@@ -12,7 +12,7 @@ export default function Inventory() {
   useEffect(() => {
     fetchInventoryData();
 
-    const interval = setInterval(fetchInventoryData, 10000);
+    const interval = setInterval(fetchInventoryData, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -24,7 +24,6 @@ export default function Inventory() {
         .then((data) => {
           setInventoryData(data);
           setSortedData(data);
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error fetching inventory data:", error);
