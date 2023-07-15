@@ -12,10 +12,8 @@ export default function Inventory() {
   useEffect(() => {
     fetchInventoryData();
 
-    // Fetch inventory data every 5 seconds
-    const interval = setInterval(fetchInventoryData, 10000);
+    const interval = setInterval(fetchInventoryData, 5000);
 
-    // Cleanup the interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -26,7 +24,6 @@ export default function Inventory() {
         .then((data) => {
           setInventoryData(data);
           setSortedData(data);
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error fetching inventory data:", error);
@@ -55,11 +52,6 @@ export default function Inventory() {
 
   const inventoryFilterOptions = [
     { text: "Quantity", onPress: () => sortData("quantity") },
-    {
-      text: "Date of Manufacture",
-      onPress: () => sortData("date_of_manufacture"),
-    },
-    { text: "Date of Expiry", onPress: () => sortData("date_of_expiry") },
     { text: "Type", onPress: () => sortData("type") },
   ];
 
@@ -71,7 +63,17 @@ export default function Inventory() {
       />
       <ScrollView>
         {sortedData.length === 0 ? (
-          <Text>No inventory data available</Text>
+          <Text
+            style={{
+              textAlign: "center",
+              marginTop: 20,
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "#999",
+            }}
+          >
+            No inventory data available
+          </Text>
         ) : (
           sortedData.map((item, index) => (
             <ChemicalCard key={index} item={item} />
