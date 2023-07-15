@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import OrderCard from "../../../components/Orders/OrdersCard";
+import AddOrder from "../../../components/Orders/AddOrder";
 
 export default function Orders() {
   const [sortedData, setSortedData] = useState([]);
@@ -10,7 +11,7 @@ export default function Orders() {
 
   useEffect(() => {
     fetchOrdersData();
-    const interval = setInterval(fetchOrdersData, 10000);
+    const interval = setInterval(fetchOrdersData, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -20,7 +21,6 @@ export default function Orders() {
         .then((response) => response.json())
         .then((data) => {
           setSortedData(data);
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error fetching orders data:", error);
@@ -58,6 +58,7 @@ export default function Orders() {
   return (
     <View style={{ margin: 15, paddingBottom: 40 }}>
       <FilteredSearch placeholder="Order" filterOptions={ordersFilterOptions} />
+      <AddOrder />
       <ScrollView>
         {sortedData.length === 0 ? (
           <Text
