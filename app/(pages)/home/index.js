@@ -6,28 +6,33 @@ export default function Home() {
   const [inventoryData, setInventoryData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
 
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`An error occurred: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Data:", data);
+      setData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle the error here, e.g. display an error message or retry the request
+    }
+  };
+
   const fetchInventoryData = () => {
-    fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemlist")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Inventory data:", data);
-        setInventoryData(data); // Update the inventory data state
-      })
-      .catch((error) => {
-        console.error("Error fetching inventory data:", error);
-      });
+    fetchData(
+      "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemlist",
+      setInventoryData
+    );
   };
 
   const fetchOrdersData = () => {
-    fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Orders data:", data);
-        setOrdersData(data); // Update the orders data state
-      })
-      .catch((error) => {
-        console.error("Error fetching orders data:", error);
-      });
+    fetchData(
+      "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist",
+      setOrdersData
+    );
   };
 
   useEffect(() => {
@@ -37,7 +42,7 @@ export default function Home() {
     const interval = setInterval(() => {
       fetchInventoryData();
       fetchOrdersData();
-    }, 10000); // Fetch data every 5 seconds (adjust the interval as needed)
+    }, 10000); // Fetch data every 10 seconds (adjust the interval as needed)
 
     return () => {
       clearInterval(interval); // Clear the interval when the component is unmounted
