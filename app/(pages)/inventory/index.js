@@ -12,7 +12,7 @@ export default function Inventory() {
   useEffect(() => {
     fetchInventoryData();
 
-    const interval = setInterval(fetchInventoryData, 50);
+    const interval = setInterval(fetchInventoryData, 5000);
 
     return () => clearInterval(interval);
   }, []);

@@ -37,7 +37,7 @@ export default function Home() {
     const interval = setInterval(() => {
       fetchInventoryData();
       fetchOrdersData();
-    }, 5000); // Fetch data every 5 seconds (adjust the interval as needed)
+    }, 10000); // Fetch data every 5 seconds (adjust the interval as needed)
 
     return () => {
       clearInterval(interval); // Clear the interval when the component is unmounted
