@@ -10,7 +10,8 @@ export default function Home() {
     fetch("https://eminent-quickest-menu.glitch.me/itemList")
       .then((response) => response.json())
       .then((data) => {
-        setInventoryData(data);
+        console.log("Inventory data:", data);
+        setInventoryData(data); // Update the inventory data state
       })
       .catch((error) => {
         console.error("Error fetching inventory data:", error);
@@ -21,7 +22,8 @@ export default function Home() {
     fetch("https://eminent-quickest-menu.glitch.me/orderList")
       .then((response) => response.json())
       .then((data) => {
-        setOrdersData(data);
+        console.log("Orders data:", data);
+        setOrdersData(data); // Update the orders data state
       })
       .catch((error) => {
         console.error("Error fetching orders data:", error);
@@ -35,7 +37,7 @@ export default function Home() {
     const interval = setInterval(() => {
       fetchInventoryData();
       fetchOrdersData();
-    }, 50); // Fetch data every 5 seconds (adjust the interval as needed)
+    }, 5000); // Fetch data every 5 seconds (adjust the interval as needed)
 
     return () => {
       clearInterval(interval); // Clear the interval when the component is unmounted

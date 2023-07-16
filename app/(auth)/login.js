@@ -60,7 +60,6 @@ export default function LogIn() {
       setIsLoading(false);
     }
   };
-
   const onForgotPasswordPressed = () => {
     router.push("/forgotPassword");
   };
