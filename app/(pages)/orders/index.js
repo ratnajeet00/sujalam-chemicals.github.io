@@ -4,6 +4,9 @@ import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import AddOrder from "../../../components/Orders/AddOrder";
 import OrderCard from "../../../components/Orders/OrdersCard";
 
+const ORDERS_API_ENDPOINT =
+  "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist";
+
 export default function Orders() {
   const [activeCard, setActiveCard] = useState(null);
   const [sortedData, setSortedData] = useState([]);
@@ -16,16 +19,11 @@ export default function Orders() {
     return () => clearInterval(interval);
   }, []);
 
-  const fetchOrdersData = () => {
+  const fetchOrdersData = async () => {
     try {
-      fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
-        .then((response) => response.json())
-        .then((data) => {
-          setSortedData(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching orders data:", error);
-        });
+      const response = await fetch(ORDERS_API_ENDPOINT);
+      const data = await response.json();
+      setSortedData(data);
     } catch (error) {
       console.error("Error fetching orders data:", error);
     }
@@ -34,7 +32,11 @@ export default function Orders() {
   const sortData = (key) => {
     const orderMultiplier = sortOrder === "asc" ? 1 : -1;
     const sorted = [...sortedData].sort((a, b) =>
-      a[key] < b[key] ? -1 * orderMultiplier : a[key] > b[key] ? 1 * orderMultiplier : 0
+      a[key] < b[key]
+        ? -1 * orderMultiplier
+        : a[key] > b[key]
+        ? 1 * orderMultiplier
+        : 0
     );
 
     setSortedData(sorted);
