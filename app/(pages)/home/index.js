@@ -7,7 +7,7 @@ export default function Home() {
   const [ordersData, setOrdersData] = useState([]);
 
   const fetchInventoryData = () => {
-    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemlist")
+    fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemlist")
       .then((response) => response.json())
       .then((data) => {
         console.log("Inventory data:", data);
@@ -19,7 +19,7 @@ export default function Home() {
   };
 
   const fetchOrdersData = () => {
-    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
+    fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
       .then((response) => response.json())
       .then((data) => {
         console.log("Orders data:", data);

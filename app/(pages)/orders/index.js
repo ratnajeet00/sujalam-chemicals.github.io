@@ -18,7 +18,7 @@ export default function Orders() {
 
   const fetchOrdersData = () => {
     try {
-      fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
+      fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
         .then((response) => response.json())
         .then((data) => {
           setSortedData(data);

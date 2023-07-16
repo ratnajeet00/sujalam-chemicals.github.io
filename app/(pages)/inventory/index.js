@@ -19,7 +19,7 @@ export default function Inventory() {
 
   const fetchInventoryData = () => {
     try {
-      fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemList")
+      fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemList")
         .then((response) => response.json())
         .then((data) => {
           setInventoryData(data);
