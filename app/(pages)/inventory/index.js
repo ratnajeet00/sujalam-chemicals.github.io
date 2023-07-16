@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import ChemicalCard from "../../../components/Inventory/ChemicalCard";
-
 export default function Inventory() {
   const [inventoryData, setInventoryData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [activeCard, setActiveCard] = useState(null);
 
   useEffect(() => {
     fetchInventoryData();
@@ -75,8 +75,13 @@ export default function Inventory() {
             No inventory data available
           </Text>
         ) : (
-          sortedData.map((item, index) => (
-            <ChemicalCard key={index} item={item} />
+          sortedData.map((item) => (
+            <ChemicalCard
+              key={item.id}
+              item={item}
+              showButtons={activeCard}
+              setShowButtons={setActiveCard}
+            />
           ))
         )}
       </ScrollView>
