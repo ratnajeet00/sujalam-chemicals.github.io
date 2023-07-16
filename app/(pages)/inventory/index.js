@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import ChemicalCard from "../../../components/Inventory/ChemicalCard";
+
 export default function Inventory() {
   const [inventoryData, setInventoryData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
@@ -17,37 +18,40 @@ export default function Inventory() {
     return () => clearInterval(interval);
   }, []);
 
-  const fetchInventoryData = () => {
-    try {
-      fetch("https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemList")
-        .then((response) => response.json())
-        .then((data) => {
-          setInventoryData(data);
-          setSortedData(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching inventory data:", error);
-        });
-    } catch (error) {
-      console.error("Error fetching inventory data:", error);
-    }
-  };
+  const fetchInventoryData = useCallback(() => {
+    fetch(
+      "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemList"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setInventoryData(data);
+        setSortedData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching inventory data:", error);
+      });
+  }, []);
 
-  const sortData = (key) => {
-    if (selectedFilter === key) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      setSortOrder("asc");
-      setSelectedFilter(key);
-    }
+  const sortData = useCallback(
+    (key) => {
+      if (selectedFilter === key) {
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+      } else {
+        setSortOrder("asc");
+        setSelectedFilter(key);
+      }
 
-    const sorted = [...sortedData].sort((a, b) => {
-      if (a[key] < b[key]) return sortOrder === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return sortOrder === "asc" ? 1 : -1;
-      return 0;
-    });
+      const sorted = [...sortedData].sort(sortBy(key, sortOrder));
 
-    setSortedData(sorted);
+      setSortedData(sorted);
+    },
+    [selectedFilter, sortOrder, sortedData]
+  );
+
+  const sortBy = (key, order) => (a, b) => {
+    if (a[key] < b[key]) return order === "asc" ? -1 : 1;
+    if (a[key] > b[key]) return order === "asc" ? 1 : -1;
+    return 0;
   };
 
   const inventoryFilterOptions = [
