@@ -12,13 +12,13 @@ export default function Orders() {
 
   useEffect(() => {
     fetchOrdersData();
-    const interval = setInterval(fetchOrdersData, 50);
+    const interval = setInterval(fetchOrdersData, 5000);
     return () => clearInterval(interval);
   }, []);
 
   const fetchOrdersData = () => {
     try {
-      fetch("https://eminent-quickest-menu.glitch.me/orderList")
+      fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist")
         .then((response) => response.json())
         .then((data) => {
           setSortedData(data);

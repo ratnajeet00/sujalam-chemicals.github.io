@@ -14,7 +14,7 @@ export default function AddOrder() {
   const [quantity, setQuantity] = useState("");
 
   const handleCreateOrder = () => {
-    fetch("https://eminent-quickest-menu.glitch.me/addOrder", {
+    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/addOrder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

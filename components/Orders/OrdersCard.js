@@ -5,7 +5,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const OrderCard = ({ item, showButtons, setShowButtons }) => {
   const handleAccept = () => {
-    fetch("https://eminent-quickest-menu.glitch.me/transferData", {
+    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/transferData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

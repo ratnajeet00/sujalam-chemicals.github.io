@@ -23,7 +23,7 @@ const ChemicalCard = ({ item, showButtons, setShowButtons }) => {
     };
 
     // Update item on the server
-    fetch("https://eminent-quickest-menu.glitch.me/updateItem", {
+    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/updateItem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
