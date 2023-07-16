@@ -9,21 +9,44 @@ const { width, height } = Dimensions.get("window");
 
 export default function AddOrder() {
   const router = useRouter();
-  const [customerName, setCustomerName] = useState("");
-  const [itemName, setItemName] = useState("");
+  const [customer_name, setCustomerName] = useState("");
+  const [item_name, setItemName] = useState("");
   const [quantity, setQuantity] = useState("");
+
+  const handleCreateOrder = () => {
+    fetch("https://eminent-quickest-menu.glitch.me/addOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customer_name,
+        item_name,
+        quantity,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Order created successfully");
+        // Navigate back to the previous screen
+        router.back();
+      })
+      .catch((error) => {
+        console.error("Error creating order:", error);
+      });
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Create new order</Text>
       <CustomInput
-        value={customerName}
+        value={customer_name}
         setValue={setCustomerName}
         placeholder="Customer Name"
         type={"data"}
       />
       <CustomInput
-        value={itemName}
+        value={item_name}
         setValue={setItemName}
         placeholder="Item Name"
         type={"data"}
@@ -43,7 +66,7 @@ export default function AddOrder() {
         >
           <AntDesign name="back" size={30} color="white" />
         </Pressable>
-        <Pressable style={styles.createButton}>
+        <Pressable style={styles.createButton} onPress={handleCreateOrder}>
           <Text style={styles.createButtonText}>Create</Text>
         </Pressable>
       </View>

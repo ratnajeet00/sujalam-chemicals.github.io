@@ -2,7 +2,45 @@ import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+
 const OrderCard = ({ item, showButtons, setShowButtons }) => {
+  const handleAccept = () => {
+    fetch("https://eminent-quickest-menu.glitch.me/transferData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ itemId: item.id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data as needed
+        console.log("Data transfer successful");
+        // Update the UI or perform any necessary actions after successful transfer
+      })
+      .catch((error) => {
+        console.error("Error transferring data:", error);
+      });
+  };
+  
+  const handleReject = () => {
+    fetch("https://eminent-quickest-menu.glitch.me/deleteData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ itemId: item.id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data as needed
+        console.log("Data deletion successful");
+      })
+      .catch((error) => {
+        console.error("Error deleting data:", error);
+      });
+  };
+  
   return (
     <Pressable onPress={() => setShowButtons(item.id)}>
       <View style={styles.card}>
@@ -18,10 +56,10 @@ const OrderCard = ({ item, showButtons, setShowButtons }) => {
         </View>
         {showButtons && (
           <View style={styles.buttonContainer}>
-            <Pressable style={styles.acceptButton}>
+            <Pressable style={styles.acceptButton} onPress={handleAccept}>
               <AntDesign name="check" size={25} color="white" />
             </Pressable>
-            <Pressable style={styles.rejectButton}>
+            <Pressable style={styles.rejectButton}  onPress={handleReject}>
               <FontAwesome name="trash" size={25} color="white" />
             </Pressable>
           </View>
