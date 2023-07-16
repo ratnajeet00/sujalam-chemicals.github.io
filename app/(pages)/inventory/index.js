@@ -56,7 +56,7 @@ export default function Inventory() {
   ];
 
   return (
-    <View style={{ margin: 15, paddingBottom: 40 }}>
+    <View style={{ margin: 15, paddingBottom: 50 }}>
       <FilteredSearch
         placeholder="Chemical"
         filterOptions={inventoryFilterOptions}

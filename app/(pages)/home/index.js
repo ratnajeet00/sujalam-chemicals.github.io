@@ -2,18 +2,12 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import QuickViewPanel from "../../../components/Dashboard/QuickViewPanel";
 
-
 export default function Home() {
   const [inventoryData, setInventoryData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
 
-  useEffect(() => {
-    fetchInventoryData();
-    fetchOrdersData();
-  }, []);
-
   const fetchInventoryData = () => {
-    fetch("https://eminent-quickest-menu.glitch.me/itemList") // Update with your server URL
+    fetch("https://eminent-quickest-menu.glitch.me/itemList")
       .then((response) => response.json())
       .then((data) => {
         setInventoryData(data);
@@ -24,7 +18,7 @@ export default function Home() {
   };
 
   const fetchOrdersData = () => {
-    fetch("https://eminent-quickest-menu.glitch.me/orderList") // Update with your server URL
+    fetch("https://eminent-quickest-menu.glitch.me/orderList")
       .then((response) => response.json())
       .then((data) => {
         setOrdersData(data);
@@ -33,6 +27,20 @@ export default function Home() {
         console.error("Error fetching orders data:", error);
       });
   };
+
+  useEffect(() => {
+    fetchInventoryData();
+    fetchOrdersData();
+
+    const interval = setInterval(() => {
+      fetchInventoryData();
+      fetchOrdersData();
+    }, 50); // Fetch data every 5 seconds (adjust the interval as needed)
+
+    return () => {
+      clearInterval(interval); // Clear the interval when the component is unmounted
+    };
+  }, []);
 
   return (
     <View style={{ margin: 15 }}>

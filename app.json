@@ -19,6 +19,14 @@
       ]
     ],
     "name": "Sujalam-Chemicals",
-    "slug": "Sujalam-Chemicals"
+    "slug": "Sujalam-Chemicals",
+    "extra": {
+      "eas": {
+        "projectId": "57559c7a-d665-4fad-9c04-5149a40854ac"
+      }
+    },
+    "android": {
+      "package": "com.ratnajeet00.SujalamChemicals"
+    }
   }
 }

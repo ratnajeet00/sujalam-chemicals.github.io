@@ -12,7 +12,7 @@ export default function Orders() {
 
   useEffect(() => {
     fetchOrdersData();
-    const interval = setInterval(fetchOrdersData, 5000);
+    const interval = setInterval(fetchOrdersData, 50);
     return () => clearInterval(interval);
   }, []);
 
