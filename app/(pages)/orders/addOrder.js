@@ -13,27 +13,29 @@ export default function AddOrder() {
   const [item_name, setItemName] = useState("");
   const [quantity, setQuantity] = useState("");
 
-  const handleCreateOrder = () => {
-    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/addOrder", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        customer_name,
-        item_name,
-        quantity,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Order created successfully");
-        // Navigate back to the previous screen
-        router.back();
-      })
-      .catch((error) => {
-        console.error("Error creating order:", error);
-      });
+  const handleCreateOrder = async () => {
+    try {
+      const response = await fetch(
+        "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/addOrder",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            customer_name,
+            item_name,
+            quantity,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log("Order created successfully");
+      // Navigate back to the previous screen
+      router.back();
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
   };
 
   return (
