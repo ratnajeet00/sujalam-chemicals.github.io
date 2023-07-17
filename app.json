@@ -12,13 +12,18 @@
     },
     "name": "Sujalam-Chemicals",
     "slug": "Sujalam-Chemicals",
+    "version": "1.0.0",
     "extra": {
       "eas": {
         "projectId": "57559c7a-d665-4fad-9c04-5149a40854ac"
       }
     },
     "android": {
-      "package": "com.ratnajeet00.SujalamChemicals"
+      "package": "com.ratnajeet00.SujalamChemicals",
+      "versionCode": 1
+    },
+    "ios": {
+      "bundleIdentifier": "com.ratnajeet00.SujalamChemicals"
     }
   }
 }

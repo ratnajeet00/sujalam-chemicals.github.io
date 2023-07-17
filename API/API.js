@@ -1,3 +1,3 @@
-const API_URL = "https://optionally-open-ox.ngrok-free.app/"
+const API_URL = "https://sujalam-chem--ratnajeet00.repl.co/";
 
 export default API_URL;

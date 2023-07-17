@@ -55,6 +55,7 @@ export default function AddOrder() {
         setValue={setQuantity}
         placeholder="Quantity"
         type={"data"}
+        onlyNumbers
       />
       <View style={styles.buttonContainer}>
         <Pressable

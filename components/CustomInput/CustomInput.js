@@ -7,6 +7,7 @@ const CustomInput = ({
   setValue,
   placeholder,
   secureTextEntry = false,
+  onlyNumbers = false,
   type,
 }) => (
   <View style={[styles.container, styles[`container_${type}`]]}>
@@ -17,6 +18,7 @@ const CustomInput = ({
       style={[styles.input, styles[`input_${type}`]]}
       placeholderTextColor={"gray"}
       secureTextEntry={secureTextEntry}
+      keyboardType={onlyNumbers ? "numeric" : "default"}
     />
   </View>
 );
