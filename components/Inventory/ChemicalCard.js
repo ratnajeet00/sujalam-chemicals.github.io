@@ -2,6 +2,10 @@ import { Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import COLORS from "../../constants/colors";
+import API_URL from "../../API/API";
+
+
+const API_for_Edit = `${API_URL}updateItem`;
 
 const ChemicalCard = ({ item, showButtons, setShowButtons }) => {
   const [newQuantity, setNewQuantity] = useState("");
@@ -23,7 +27,7 @@ const ChemicalCard = ({ item, showButtons, setShowButtons }) => {
     };
 
     // Update item on the server
-    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/updateItem", {
+    fetch(API_for_Edit, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
