@@ -39,7 +39,7 @@ export default function Home() {
     const interval = setInterval(() => {
       fetchInventoryData();
       fetchOrdersData();
-    }, 10000);
+    }, 20000);
 
     return () => {
       clearInterval(interval);

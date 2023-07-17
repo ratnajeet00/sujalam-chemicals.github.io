@@ -8,11 +8,14 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
+import API_URL from "../../API/API";
 import LOGO from "../../assets/LOGO.png";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import COLORS from "../../constants/colors";
 import { AuthStore } from "../../store.js";
+
+const LOGIN_API_ENDPOINT = `${API_URL}login`;
 
 export default function LogIn() {
   const router = useRouter();
@@ -34,16 +37,13 @@ export default function LogIn() {
         password: password,
       });
 
-      const response = await fetch(
-        "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: body,
-        }
-      );
+      const response = await fetch(LOGIN_API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
 
       const data = await response.json();
       if (response.ok && data.message === "success") {
