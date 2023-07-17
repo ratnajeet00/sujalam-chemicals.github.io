@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
+import API_URL from "../../../API/API";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import AddOrder from "../../../components/Orders/AddOrder";
 import OrderCard from "../../../components/Orders/OrdersCard";
 
-const ORDERS_API_ENDPOINT =
-  "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist";
+const ORDERS_API_ENDPOINT = `${API_URL}orderList`;
 
 export default function Orders() {
   const [activeCard, setActiveCard] = useState(null);
@@ -75,10 +75,10 @@ export default function Orders() {
         item={item}
         showButtons={activeCard === item.id}
         setShowButtons={setActiveCard}
+        isLastCard={index === sortedData.length - 1} // Set isLastCard to true for the last card
       />
     ));
   };
-
   return (
     <View style={{ margin: 15, paddingBottom: 40 }}>
       <FilteredSearch placeholder="Order" filterOptions={ordersFilterOptions} />

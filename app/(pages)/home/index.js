@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
+import API_URL from "../../../API/API";
 import QuickViewPanel from "../../../components/Dashboard/QuickViewPanel";
+
+const ITEMS_API_ENDPOINT = `${API_URL}itemList`;
+const ORDERS_API_ENDPOINT = `${API_URL}orderList`;
 
 export default function Home() {
   const [inventoryData, setInventoryData] = useState([]);
@@ -13,26 +17,19 @@ export default function Home() {
         throw new Error(`An error occurred: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Data:", data);
+      console.log("Data fetched!");
       setData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-      // Handle the error here, e.g. display an error message or retry the request
     }
   };
 
   const fetchInventoryData = () => {
-    fetchData(
-      "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemlist",
-      setInventoryData
-    );
+    fetchData(ITEMS_API_ENDPOINT, setInventoryData);
   };
 
   const fetchOrdersData = () => {
-    fetchData(
-      "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/orderlist",
-      setOrdersData
-    );
+    fetchData(ORDERS_API_ENDPOINT, setOrdersData);
   };
 
   useEffect(() => {
@@ -42,10 +39,10 @@ export default function Home() {
     const interval = setInterval(() => {
       fetchInventoryData();
       fetchOrdersData();
-    }, 10000); // Fetch data every 10 seconds (adjust the interval as needed)
+    }, 10000);
 
     return () => {
-      clearInterval(interval); // Clear the interval when the component is unmounted
+      clearInterval(interval);
     };
   }, []);
 

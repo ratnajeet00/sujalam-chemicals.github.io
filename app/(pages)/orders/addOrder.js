@@ -2,6 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
+import API_URL from "../../../API/API";
 import CustomInput from "../../../components/CustomInput/CustomInput";
 import COLORS from "../../../constants/colors";
 
@@ -15,23 +16,19 @@ export default function AddOrder() {
 
   const handleCreateOrder = async () => {
     try {
-      const response = await fetch(
-        "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/addOrder",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            customer_name,
-            item_name,
-            quantity,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}addOrder`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer_name,
+          item_name,
+          quantity,
+        }),
+      });
       const data = await response.json();
-      console.log("Order created successfully");
-      // Navigate back to the previous screen
+      alert("Order created successfully!");
       router.back();
     } catch (error) {
       console.error("Error creating order:", error);

@@ -1,11 +1,16 @@
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import API_URL from "../../API/API";
 
-
-const OrderCard = ({ item, showButtons, setShowButtons }) => {
+const OrderCard = ({
+  item,
+  showButtons,
+  setShowButtons,
+  isLastCard = false,
+}) => {
   const handleAccept = () => {
-    fetch("https://dec8-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/transferData", {
+    fetch(`${API_URL}transferData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,9 +27,9 @@ const OrderCard = ({ item, showButtons, setShowButtons }) => {
         console.error("Error transferring data:", error);
       });
   };
-  
+
   const handleReject = () => {
-    fetch("https://eminent-quickest-menu.glitch.me/deleteData", {
+    fetch(`${API_URL}deleteData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,10 +45,10 @@ const OrderCard = ({ item, showButtons, setShowButtons }) => {
         console.error("Error deleting data:", error);
       });
   };
-  
+
   return (
     <Pressable onPress={() => setShowButtons(item.id)}>
-      <View style={styles.card}>
+      <View style={[styles.card, isLastCard && styles.lastCard]}>
         <View>
           <Text style={styles.name}>{item.item_name}</Text>
           <Text>Qty: {item.quantity}</Text>
@@ -59,7 +64,7 @@ const OrderCard = ({ item, showButtons, setShowButtons }) => {
             <Pressable style={styles.acceptButton} onPress={handleAccept}>
               <AntDesign name="check" size={25} color="white" />
             </Pressable>
-            <Pressable style={styles.rejectButton}  onPress={handleReject}>
+            <Pressable style={styles.rejectButton} onPress={handleReject}>
               <FontAwesome name="trash" size={25} color="white" />
             </Pressable>
           </View>
@@ -77,6 +82,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
     borderRadius: 5,
+  },
+  lastCard: {
+    marginBottom: 90,
   },
   name: {
     fontWeight: "bold",

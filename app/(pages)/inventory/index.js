@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
+import API_URL from "../../../API/API";
 import FilteredSearch from "../../../components/FilteredSearch/FilteredSearch";
 import ChemicalCard from "../../../components/Inventory/ChemicalCard";
+
+const ITEMS_API_ENDPOINT = `${API_URL}itemList`;
 
 export default function Inventory() {
   const [inventoryData, setInventoryData] = useState([]);
@@ -19,9 +22,7 @@ export default function Inventory() {
   }, []);
 
   const fetchInventoryData = useCallback(() => {
-    fetch(
-      "https://dbd4-2405-201-4014-21e-74ac-180d-a3b4-ef2b.ngrok-free.app/itemList"
-    )
+    fetch(ITEMS_API_ENDPOINT)
       .then((response) => response.json())
       .then((data) => {
         setInventoryData(data);
