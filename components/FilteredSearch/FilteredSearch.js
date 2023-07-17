@@ -3,17 +3,28 @@ import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import COLORS from "../../constants/colors";
 
-const FilteredSearch = ({ placeholder, filterOptions }) => {
+const FilteredSearch = ({ placeholder, filterOptions, onSearch }) => {
   const [showOptions, setShowOptions] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const toggleShowOptions = () => {
     setShowOptions(!showOptions);
   };
 
+  const handleSearchTextChange = (text) => {
+    setSearchText(text);
+    onSearch(text);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <TextInput style={styles.searchField} placeholder={placeholder} />
+        <TextInput
+          style={styles.searchField}
+          placeholder={placeholder}
+          onChangeText={handleSearchTextChange}
+          value={searchText}
+        />
         <Pressable style={styles.filterButton} onPress={toggleShowOptions}>
           <FontAwesome5 name="filter" size={40} color={COLORS.primary} />
         </Pressable>

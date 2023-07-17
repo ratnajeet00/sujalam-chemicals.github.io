@@ -9,9 +9,11 @@ const ORDERS_API_ENDPOINT = `${API_URL}orderList`;
 
 export default function Orders() {
   const [activeCard, setActiveCard] = useState(null);
+  const [ordersData, setOrdersData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchOrdersData();
@@ -23,6 +25,7 @@ export default function Orders() {
     try {
       const response = await fetch(ORDERS_API_ENDPOINT);
       const data = await response.json();
+      setOrdersData(data);
       setSortedData(data);
     } catch (error) {
       console.error("Error fetching orders data:", error);
@@ -44,12 +47,25 @@ export default function Orders() {
     setSelectedFilter(key);
   };
 
+  const handleSearch = (text) => {
+    setSearchText(text);
+
+    if (text.length === 0) {
+      setSortedData(ordersData);
+    } else {
+      const filteredData = ordersData.filter((item) =>
+        item.item_name.toLowerCase().includes(text.toLowerCase())
+      );
+      setSortedData(filteredData);
+    }
+  };
+
   const ordersFilterOptions = [
-    { text: "Chemical Name", onPress: () => sortData("chemicalName") },
-    { text: "Qty", onPress: () => sortData("qty") },
-    { text: "Date of Ordering", onPress: () => sortData("dateOfOrdering") },
-    { text: "Date of Delivery", onPress: () => sortData("dateOfDelivery") },
-    { text: "Client Name", onPress: () => sortData("clientName") },
+    { text: "Chemical Name", onPress: () => sortData("item_name") },
+    { text: "Qty", onPress: () => sortData("quantity") },
+    { text: "Date of Ordering", onPress: () => sortData("date_of_order") },
+    { text: "Date of Delivery", onPress: () => sortData("date_of_delivery") },
+    { text: "Client Name", onPress: () => sortData("customer_name") },
   ];
 
   const renderOrderCards = () => {
@@ -79,9 +95,14 @@ export default function Orders() {
       />
     ));
   };
+  
   return (
     <View style={{ margin: 15, paddingBottom: 40 }}>
-      <FilteredSearch placeholder="Order" filterOptions={ordersFilterOptions} />
+      <FilteredSearch
+        placeholder="Order"
+        filterOptions={ordersFilterOptions}
+        onSearch={handleSearch}
+      />
       <AddOrder />
       <ScrollView>{renderOrderCards()}</ScrollView>
     </View>

@@ -12,6 +12,7 @@ export default function Inventory() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [activeCard, setActiveCard] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchInventoryData();
@@ -55,6 +56,19 @@ export default function Inventory() {
     return 0;
   };
 
+  const handleSearch = (text) => {
+    setSearchText(text);
+  
+    if (text.length === 0) {
+      setSortedData(inventoryData);
+    } else {
+      const filteredData = inventoryData.filter((item) =>
+        item.item_name.toLowerCase().includes(text.toLowerCase())
+      );
+      setSortedData(filteredData);
+    }
+  };  
+
   const inventoryFilterOptions = [
     { text: "Quantity", onPress: () => sortData("quantity") },
     { text: "Type", onPress: () => sortData("type") },
@@ -65,6 +79,7 @@ export default function Inventory() {
       <FilteredSearch
         placeholder="Chemical"
         filterOptions={inventoryFilterOptions}
+        onSearch={handleSearch}
       />
       <ScrollView>
         {sortedData.length === 0 ? (
