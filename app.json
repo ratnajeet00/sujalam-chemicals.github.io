@@ -1,7 +1,7 @@
 {
   "expo": {
     "splash": {
-      "image": "./assets/splash.jpeg",
+      "image": "./assets/splash.png",
       "resizeMode": "cover"
     },
     "icon": "./assets/icon.png",
