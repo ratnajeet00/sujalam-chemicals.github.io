@@ -6,6 +6,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.4.10",
     "expo": "^48.0.19",
     "expo-barcode-scanner": "~12.3.2",
     "expo-checkbox": "^2.4.0",

@@ -1,7 +1,8 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import API_URL from "../../../API/API";
 import CustomInput from "../../../components/CustomInput/CustomInput";
 import COLORS from "../../../constants/colors";
@@ -11,8 +12,26 @@ const { width, height } = Dimensions.get("window");
 export default function AddOrder() {
   const router = useRouter();
   const [customer_name, setCustomerName] = useState("");
-  const [item_name, setItemName] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  const fetchItems = async () => {
+    try {
+      const response = await fetch(
+        "https://sujalam-chem--ratnajeet00.repl.co/itemlist"
+      );
+      let data = await response.json();
+      data = data.sort((a, b) => a.item_name.localeCompare(b.item_name));
+      setItems(data);
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
+  };
 
   const handleCreateOrder = async () => {
     try {
@@ -23,7 +42,7 @@ export default function AddOrder() {
         },
         body: JSON.stringify({
           customer_name,
-          item_name,
+          item_name: selectedItem,
           quantity,
         }),
       });
@@ -44,12 +63,21 @@ export default function AddOrder() {
         placeholder="Customer Name"
         type={"data"}
       />
-      <CustomInput
-        value={item_name}
-        setValue={setItemName}
-        placeholder="Item Name"
-        type={"data"}
-      />
+      <View style={styles.pickerContainer}>
+        <Picker
+          style={styles.picker}
+          selectedValue={selectedItem}
+          onValueChange={(itemValue) => setSelectedItem(itemValue)}
+        >
+          {items.map((item) => (
+            <Picker.Item
+              key={item.id}
+              label={item.item_name}
+              value={item.item_name}
+            />
+          ))}
+        </Picker>
+      </View>
       <CustomInput
         value={quantity}
         setValue={setQuantity}
@@ -82,6 +110,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 15,
+  },
+  pickerContainer: {
+    borderRadius: 10,
+    overflow: "hidden",
+    backgroundColor: COLORS.bg,
+  },
+  picker: {
+    color: "gray",
   },
   buttonContainer: {
     flexDirection: "row",
