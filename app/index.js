@@ -11,7 +11,6 @@ export default function Index() {
 
   React.useEffect(() => {
     if (!navigationState?.key) return;
-    console.log(navigationState.key);
 
     const inAuthGroup = segments[0] === "(auth)";
 
@@ -29,7 +28,9 @@ export default function Index() {
   if (!navigationState?.key)
     return (
       <View>
-        <Text>Loading...</Text>
+        <Text>
+          If you see this for more than a few seconds, something is wrong.
+        </Text>
       </View>
     );
 }
