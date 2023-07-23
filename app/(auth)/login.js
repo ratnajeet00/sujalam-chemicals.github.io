@@ -63,7 +63,8 @@ export default function LogIn() {
   };
 
   const onForgotPasswordPressed = () => {
-    router.push("/forgotPassword");
+    // router.push("/forgotPassword");
+    alert("Chill bro, just remember your password.")
   };
 
   return (
